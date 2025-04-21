@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FlashFeedAI</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header>
+    <h1>FlashFeedAI</h1>
+    <p>Daily AI-powered updates</p>
+  </header>
+
+  <main id="post-area">
+    <!-- Previous posts will stack here -->
+  </main>
+
+  <footer>
+    <p>&copy; 2025 FlashFeedAI</p>
+  </footer>
+
+  <script>
+    // Load previous posts from localStorage
+    const postArea = document.getElementById("post-area");
+    const posts = JSON.parse(localStorage.getItem("aiPosts")) || [];
+
+    function renderPosts() {
+      postArea.innerHTML = posts.map(post => `
+        <div class="post-card">
+          <h2>${post.title}</h2>
+          <p>${post.content}</p>
+        </div>
+      `).join('');
+    }
+
+    // Simulate API call with today's post (replace with Gemini API later)
+    const today = new Date().toLocaleDateString('en-US', {
+      year: 'numeric', month: 'long', day: 'numeric'
+    });
+
+    const newPost = {
+      title: `AI Flash: ${today}`,
+      content: `Google's Gemini 2.0 is helping researchers automate diagnoses with 90% accuracy. Meanwhile, OpenAI unveils a memory-powered tool that mimics human recall.`
+    };
+
+    // Add if not already posted today
+    if (!posts.find(p => p.title.includes(today))) {
+      posts.unshift(newPost);
+      localStorage.setItem("aiPosts", JSON.stringify(posts));
+    }
+
+    renderPosts();
+  </script>
+</body>
+</html>
