@@ -5,6 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>FlashFeedAI</title>
   <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* Responsive and clean minimal CSS */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      color: #2c3e50;
+    }
+
+    header p {
+      color: #7f8c8d;
+      font-size: 1.1em;
+    }
+
+    .post-card {
+      background: #ffffff;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 800px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+
+    .post-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .post-card h2 {
+      color: #1e272e;
+      margin-bottom: 10px;
+    }
+
+    .post-card p {
+      color: #4b4b4b;
+    }
+
+    footer {
+      text-align: center;
+      padding-top: 40px;
+      color: #aaa;
+      font-size: 0.9em;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -13,15 +74,14 @@
   </header>
 
   <main id="post-area">
-    <!-- Previous posts will stack here -->
+    <!-- Posts will appear here -->
   </main>
 
   <footer>
-    <p>&copy; 2025 FlashFeedAI</p>
+    <p>&copy; 2025 FlashFeedAI. All rights reserved.</p>
   </footer>
 
   <script>
-    // Load previous posts from localStorage
     const postArea = document.getElementById("post-area");
     const posts = JSON.parse(localStorage.getItem("aiPosts")) || [];
 
@@ -34,7 +94,6 @@
       `).join('');
     }
 
-    // Simulate API call with today's post (replace with Gemini API later)
     const today = new Date().toLocaleDateString('en-US', {
       year: 'numeric', month: 'long', day: 'numeric'
     });
@@ -44,8 +103,7 @@
       content: `Google's Gemini 2.0 is helping researchers automate diagnoses with 90% accuracy. Meanwhile, OpenAI unveils a memory-powered tool that mimics human recall.`
     };
 
-    // Add if not already posted today
-    if (!posts.find(p => p.title.includes(today))) {
+    if (!posts.some(p => p.title.includes(today))) {
       posts.unshift(newPost);
       localStorage.setItem("aiPosts", JSON.stringify(posts));
     }
