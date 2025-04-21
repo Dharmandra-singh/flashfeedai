@@ -3,6 +3,7 @@ body {
   font-family: Arial, sans-serif;
   background: #f4f4f4;
   color: #222;
+  animation: fadeIn 1s ease-in-out;
 }
 
 header {
@@ -10,6 +11,7 @@ header {
   color: white;
   padding: 1.2rem;
   text-align: center;
+  animation: slideDown 0.6s ease-out;
 }
 
 main {
@@ -22,6 +24,10 @@ main {
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   padding: 1rem;
   margin-bottom: 1rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUp 0.5s ease-out forwards;
+  animation-delay: 0.3s;
 }
 
 footer {
@@ -32,4 +38,21 @@ footer {
   position: fixed;
   bottom: 0;
   width: 100%;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
